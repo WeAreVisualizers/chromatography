@@ -1,4 +1,5 @@
-var Color, X, Y, Z
+(function() {
+  var Color, X, Y, Z
 
 chromato = function(x, y, z, m) {
   return new Color(x, y, z, m);
@@ -13,3 +14,4 @@ chromato.hex = function(x) {
   return new Color(x);
 };
 
+}).call(this);
