@@ -9,9 +9,14 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
     module.exports = chroma;
   }
 
-chromato.color = function(x, y, z, m) {
-  return new Color(x, y, z, m);
-};
+  if (typeof define === 'function' && define.amd) {
+    define([], function() {
+      return chroma;
+    });
+  } else {
+    root = typeof exports !== "undefined" && exports !== null ? exports : this;
+    root.chroma = chroma;
+  }
 
   chromato.color = function(x, y, z, m) {
     return new Color(x, y, z, m);
