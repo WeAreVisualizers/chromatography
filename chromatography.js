@@ -30,6 +30,10 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
     return new Color(x);
   };
   
+  chromato.hsl = function(h, s, l, a) {
+    return new Color(h, s, l, a, 'hsl');
+  };
+
   chromato.hsv = function(h, s, v, a) {
     return new Color(h, s, v, a, 'hsv');
   };
