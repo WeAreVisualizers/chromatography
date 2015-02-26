@@ -30,6 +30,17 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
     return new Color(x);
   };
   
+  chromato.hsv = function(h, s, v, a) {
+    return new Color(h, s, v, a, 'hsv');
+  };
+
+  chromato.lab = function(l, a, b) {
+    return new Color(l, a, b, 'lab');
+  };
+
+  chromato.lch = function(l, c, h) {
+    return new Color(l, c, h, 'lch');
+  };
   chromato.interpolate = function(a, b, f, m) {
     if ((a == null) || (b == null)) {
       return '#000';
