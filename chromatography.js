@@ -35,4 +35,7 @@ chromato.color = function(x, y, z, m) {
     return a.interpolate(f, b, m);
   };
 
-}).call(this);  chromato.mix = chromato.interpolate;
+  chromato.mix = chromato.interpolate;
+
+}).call(this);
+
