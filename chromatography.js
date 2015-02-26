@@ -22,5 +22,17 @@ chromato.color = function(x, y, z, m) {
     return new Color(x);
   };
   
+  chromato.interpolate = function(a, b, f, m) {
+    if ((a == null) || (b == null)) {
+      return '#000';
+    }
+    if (type(a) === 'string') {
+      a = new Color(a);
+    }
+    if (type(b) === 'string') {
+      b = new Color(b);
+    }
+    return a.interpolate(f, b, m);
+  };
 
 }).call(this);
