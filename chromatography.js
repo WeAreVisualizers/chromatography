@@ -5,6 +5,9 @@ chromato = function(x, y, z, m) {
   return new Color(x, y, z, m);
 };
 
+if ((typeof module !== "undefined" && module !== null) && (module.exports != null)) {
+    module.exports = chroma;
+  }
 
 chromato.color = function(x, y, z, m) {
   return new Color(x, y, z, m);
