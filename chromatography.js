@@ -73,5 +73,23 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
 
   chromato.mix = chromato.interpolate;
 
+  chromato.contrast = function(a, b) {
+    var l1, l2;
+
+    if (type(a) === 'string') {
+      a = new Color(a);
+    }
+    if (type(b) === 'string') {
+      b = new Color(b);
+    }
+    l1 = a.luminance();
+    l2 = b.luminance();
+    if (l1 > l2) {
+      return (l1 + 0.05) / (l2 + 0.05);
+    } else {
+      return (l2 + 0.05) / (l1 + 0.05);
+    }
+  };
+
 }).call(this);
 
