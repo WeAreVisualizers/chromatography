@@ -45,6 +45,11 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
   chromato.lch = function(l, c, h) {
     return new Color(l, c, h, 'lch');
   };
+  
+  chromato.css = function(x) {
+    return new Color(x);
+  };
+
   chromato.hsi = function(h, s, i) {
     return new Color(h, s, i, 'hsi');
   };
