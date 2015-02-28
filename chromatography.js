@@ -91,5 +91,9 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
     }
   };
 
+  chromato.luminance = function(color) {
+    return chroma(color).luminance();
+  };
+
 }).call(this);
 
