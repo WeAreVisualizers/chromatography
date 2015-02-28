@@ -144,6 +144,16 @@
     return [r, g, b];
   };
 
+  Color.rgb2hex = function(r, g, b) {
+    var str, u, _ref2;
+    if (r !== void 0 && r.length === 3) {
+      _ref2 = r, r = _ref2[0], g = _ref2[1], b = _ref2[2];
+    }
+    u = r << 16 | g << 8 | b;
+    str = '000000' + u.toString(16).toUpperCase();
+    return '#' + str.substr(str.length - 6);
+  };
+
   };
   };
 
