@@ -13,6 +13,38 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
     root = typeof exports !== "undefined" && exports !== null ? exports : this;
     root.chroma = chroma;
   }
+    function Color(x, y, z, m) {
+      var me, _ref2;
+      me = this;
+      if (!(x != null) && !(y != null) && !(z != null) && !(m != null)) {
+        x = [255, 0, 255];
+      }
+      if (type(x) === 'array' && x.length === 3) {
+        if (m == null) m = y;
+        _ref2 = x, x = _ref2[0], y = _ref2[1], z = _ref2[2];
+      }
+      if (type(x) === 'string') {
+        m = 'hex';
+      } else {
+        if (m == null) m = 'rgb';
+      }
+      if (m === 'rgb') {
+        me.rgb = [x, y, z];
+      } else if (m === 'hsl') {
+        me.rgb = Color.hsl2rgb(x, y, z);
+      } else if (m === 'hsv') {
+        me.rgb = Color.hsv2rgb(x, y, z);
+      } else if (m === 'hex') {
+        me.rgb = Color.hex2rgb(x);
+      } else if (m === 'lab') {
+        me.rgb = Color.lab2rgb(x, y, z);
+      } else if (m === 'hcl') {
+        me.rgb = Color.hcl2rgb(x, y, z);
+      } else if (m === 'hsi') {
+        me.rgb = Color.hsi2rgb(x, y, z);
+      }
+    }
+
 
   chromato.color = function(x, y, z, m) {
     return new Color(x, y, z, m);
