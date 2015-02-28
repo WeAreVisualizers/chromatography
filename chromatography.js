@@ -305,6 +305,37 @@
     return [x, y, z];
   };
 
+  Color.xyz2rgb = function(x, y, z) {
+
+    var b, bl, clip, correct, g, gl, r, rl, _ref2, _ref3;
+    if (type(x) === 'array' && x.length === 3) {
+      _ref2 = x, x = _ref2[0], y = _ref2[1], z = _ref2[2];
+    }
+    rl = 3.2406 * x - 1.5372 * y - 0.4986 * z;
+    gl = -0.9689 * x + 1.8758 * y + 0.0415 * z;
+    bl = 0.0557 * x - 0.2040 * y + 1.0570 * z;
+    clip = Math.min(rl, gl, bl) < -0.001 || Math.max(rl, gl, bl) > 1.001;
+    if (clip) {
+      rl = rl < 0.0 ? 0.0 : rl > 1.0 ? 1.0 : rl;
+      gl = gl < 0.0 ? 0.0 : gl > 1.0 ? 1.0 : gl;
+      bl = bl < 0.0 ? 0.0 : bl > 1.0 ? 1.0 : bl;
+    }
+    if (clip) {
+      _ref3 = [void 0, void 0, void 0], rl = _ref3[0], gl = _ref3[1], bl = _ref3[2];
+    }
+    correct = function(cl) {
+      var a;
+      a = 0.055;
+      if (cl <= 0.0031308) {
+        return 12.92 * cl;
+      } else {
+        return (1 + a) * Math.pow(cl, 1 / 2.4) - a;
+      }
+    };
+    r = Math.round(255.0 * correct(rl));
+    g = Math.round(255.0 * correct(gl));
+    b = Math.round(255.0 * correct(bl));
+    return [r, g, b];
   };
 
   };
