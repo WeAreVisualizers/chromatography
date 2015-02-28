@@ -417,6 +417,21 @@
     return Color.xyz2lab(x, y, z);
   };
 
+  Color.lab2hcl = function(l, a, b) {
+    var L, tau_const, angle, c, r, s, _ref2;
+    if (type(l) === 'array' && l.length === 3) {
+      _ref2 = l, l = _ref2[0], a = _ref2[1], b = _ref2[2];
+    }
+    L = l;
+    l = (l - 0.09) / 0.61;
+    r = Math.sqrt(a * a + b * b);
+    s = r / (l * 0.311 + 0.125);
+    tau_const = 6.283185307179586476925287;
+    angle = Math.atan2(a, b);
+    c = (tau_const / 6 - angle) / tau_const;
+    c *= 360;
+    if (c < 0) c += 360;
+    return [c, s, l];
   };
 
   };
