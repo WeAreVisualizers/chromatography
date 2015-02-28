@@ -443,6 +443,30 @@
     return Color.lab2hcl(l, a, b);
   };
 
+  Color.rgb2hsi = function(r, g, b) {
+    var pi_const_x2, h, i, min, s, _ref2;
+    if (type(r) === 'array' && r.length === 3) {
+      _ref2 = r, r = _ref2[0], g = _ref2[1], b = _ref2[2];
+    }
+    pi_const_x2 = Math.PI * 2;
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    min = Math.min(r, g, b);
+    i = (r + g + b) / 3;
+    s = 1 - min / i;
+    if (s === 0) {
+      h = 0;
+    } else {
+      h = ((r - g) + (r - b)) / 2;
+      h /= Math.sqrt((r - g) * (r - g) + (r - b) * (g - b));
+      h = Math.acos(h);
+      if (b > g) h = pi_const_x2 - h;
+      h /= pi_const_x2;
+    }
+    return [h * 360, s, i];
+  };
+
   };
 
   };
