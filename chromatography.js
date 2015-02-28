@@ -373,6 +373,29 @@
     return Color.lab2rgb(L, a, b);
   };
 
+  Color.rgb2xyz = function(r, g, b) {
+    var bl, correct, gl, rl, x, y, z, _ref2;
+    if (r !== void 0 && r.length === 3) {
+      _ref2 = r, r = _ref2[0], g = _ref2[1], b = _ref2[2];
+    }
+    correct = function(c) {
+      var a;
+      a = 0.055;
+      if (c <= 0.04045) {
+        return c / 12.92;
+      } else {
+        return Math.pow((c + a) / (1 + a), 2.4);
+      }
+    };
+    rl = correct(r / 255.0);
+    gl = correct(g / 255.0);
+    bl = correct(b / 255.0);
+    x = 0.4124 * rl + 0.3576 * gl + 0.1805 * bl;
+    y = 0.2126 * rl + 0.7152 * gl + 0.0722 * bl;
+    z = 0.0193 * rl + 0.1192 * gl + 0.9505 * bl;
+    return [x, y, z];
+  };
+
   };
 
   };
