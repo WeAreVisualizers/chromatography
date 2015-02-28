@@ -434,6 +434,15 @@
     return [c, s, l];
   };
 
+  Color.rgb2hcl = function(r, g, b) {
+    var a, l, _ref2, _ref3;
+    if (type(r) === 'array' && r.length === 3) {
+      _ref2 = r, r = _ref2[0], g = _ref2[1], b = _ref2[2];
+    }
+    _ref3 = Color.rgb2lab(r, g, b), l = _ref3[0], a = _ref3[1], b = _ref3[2];
+    return Color.lab2hcl(l, a, b);
+  };
+
   };
 
   };
