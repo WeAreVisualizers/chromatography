@@ -467,6 +467,37 @@
     return [h * 360, s, i];
   };
 
+  Color.hsi2rgb = function(h, s, i) {
+    var pi_const_div3, pi_const_x2, b, cos, g, r, _ref2;
+    if (type(h) === 'array' && h.length === 3) {
+      _ref2 = h, h = _ref2[0], s = _ref2[1], i = _ref2[2];
+    }
+    pi_const_x2 = Math.PI * 2;
+    pi_const_div3 = Math.PI / 3;
+    cos = Math.cos;
+    if (h < 0) h += 360;
+    if (h > 360) h -= 360;
+    h /= 360;
+    if (h < 1 / 3) {
+      b = (1 - s) / 3;
+      r = (1 + s * cos(pi_const_x2 * h) / cos(pi_const_div3 - pi_const_x2 * h)) / 3;
+      g = 1 - (b + r);
+    } else if (h < 2 / 3) {
+      h -= 1 / 3;
+      r = (1 - s) / 3;
+      g = (1 + s * cos(pi_const_x2 * h) / cos(pi_const_div3 - pi_const_x2 * h)) / 3;
+      b = 1 - (r + g);
+    } else {
+      h -= 2 / 3;
+      g = (1 - s) / 3;
+      b = (1 + s * cos(pi_const_x2 * h) / cos(pi_const_div3 - pi_const_x2 * h)) / 3;
+      r = 1 - (g + b);
+    }
+    r = i * r * 3;
+    g = i * g * 3;
+    b = i * b * 3;
+    return [r * 255, g * 255, b * 255];
+  };
   };
 
   };
