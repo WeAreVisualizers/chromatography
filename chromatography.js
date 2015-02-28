@@ -198,6 +198,27 @@
     return [r, g, b];
   };
 
+  Color.rgb2hsv = function(r, g, b) {
+    var delta, h, max, min, s, v, _ref2;
+    if (r !== void 0 && r.length === 3) {
+      _ref2 = r, r = _ref2[0], g = _ref2[1], b = _ref2[2];
+    }
+    min = Math.min(r, g, b);
+    max = Math.max(r, g, b);
+    delta = max - min;
+    v = max / 255.0;
+    s = delta / max;
+    if (s === 0) {
+      h = void 0;
+      s = 0;
+    } else {
+      if (r === max) h = (g - b) / delta;
+      if (g === max) h = 2 + (b - r) / delta;
+      if (b === max) h = 4 + (r - g) / delta;
+      h *= 60;
+      if (h < 0) h += 360;
+    }
+    return [h, s, v];
   };
   };
 
