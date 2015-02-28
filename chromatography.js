@@ -128,6 +128,9 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
         throw m + ' is not supported as a color mode';
       }
     };
+
+    return Color;
+
   };
   
   chromato.rgb = function(r, g, b, a) {
