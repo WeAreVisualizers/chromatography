@@ -123,6 +123,27 @@
     return Color;
 
   })();
+
+  Color.hex2rgb = function(hex) {
+    var b, g, r, u;
+    if (!hex.match(/^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
+      if ((chromato.colors != null) && chromato.colors[hex]) {
+        hex = chromato.colors[hex];
+      } else {
+        throw 'this color format is unknown: ' + hex;
+      }
+    }
+    if (hex.length === 4 || hex.length === 7) hex = hex.substr(1);
+    if (hex.length === 3) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    u = parseInt(hex, 16);
+    r = u >> 16;
+    g = u >> 8 & 0xFF;
+    b = u & 0xFF;
+    return [r, g, b];
+  };
+
   };
   };
 
