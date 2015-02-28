@@ -2,8 +2,8 @@
 
   var Color, ColorScale, chromato
 
-  Color = (function() {
 
+  Color = (function() {
     function Color(x, y, z, m) {
       var me, _ref2;
       me = this;
