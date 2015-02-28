@@ -284,6 +284,27 @@
     return [h, s, l];
   };
 
+  Color.lab2xyz = function(l, a, b) {
+
+    var finv, ill, sl, x, y, z, _ref2;
+    if (type(l) === 'array' && l.length === 3) {
+      _ref2 = l, l = _ref2[0], a = _ref2[1], b = _ref2[2];
+    }
+    finv = function(t) {
+      if (t > (6.0 / 29.0)) {
+        return t * t * t;
+      } else {
+        return 3 * (6.0 / 29.0) * (6.0 / 29.0) * (t - 4.0 / 29.0);
+      }
+    };
+    sl = (l + 0.16) / 1.16;
+    ill = [0.96421, 1.00000, 0.82519];
+    y = ill[1] * finv(sl);
+    x = ill[0] * finv(sl + (a / 5.0));
+    z = ill[2] * finv(sl - (b / 2.0));
+    return [x, y, z];
+  };
+
   };
 
   };
