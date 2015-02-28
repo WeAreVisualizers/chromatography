@@ -366,6 +366,11 @@
     b = Math.cos(angle) * r;
     return [L, a, b];
   };
+
+  Color.hcl2rgb = function(c, s, l) {
+    var L, a, b, _ref2;
+    _ref2 = Color.hcl2lab(c, s, l), L = _ref2[0], a = _ref2[1], b = _ref2[2];
+    return Color.lab2rgb(L, a, b);
   };
 
   };
