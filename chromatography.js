@@ -3,14 +3,6 @@
   var Color, ColorScale, chromato
 
 
-  if (typeof define === 'function' && define.amd) {
-    define([], function() {
-      return chroma;
-    });
-  } else {
-    root = typeof exports !== "undefined" && exports !== null ? exports : this;
-    root.chroma = chroma;
-  }
     function Color(x, y, z, m) {
       var me, _ref2;
       me = this;
