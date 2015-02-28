@@ -45,9 +45,33 @@ if ((typeof module !== "undefined" && module !== null) && (module.exports != nul
       }
     }
 
+    Color.prototype.hex = function() {
+      return Color.rgb2hex(this.rgb);
+    };
 
-  chromato.color = function(x, y, z, m) {
-    return new Color(x, y, z, m);
+    Color.prototype.toString = function() {
+      return this.hex();
+    };
+
+    Color.prototype.hsl = function() {
+      return Color.rgb2hsl(this.rgb);
+    };
+
+    Color.prototype.hsv = function() {
+      return Color.rgb2hsv(this.rgb);
+    };
+
+    Color.prototype.lab = function() {
+      return Color.rgb2lab(this.rgb);
+    };
+
+    Color.prototype.hcl = function() {
+      return Color.rgb2hcl(this.rgb);
+    };
+
+    Color.prototype.hsi = function() {
+      return Color.rgb2hsi(this.rgb);
+    };
   };
   
   chromato.rgb = function(r, g, b, a) {
