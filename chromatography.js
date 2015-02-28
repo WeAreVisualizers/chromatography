@@ -2,6 +2,7 @@
 
   var Color, ColorScale, chromato
 
+  Color = (function() {
 
     function Color(x, y, z, m) {
       var me, _ref2;
@@ -121,6 +122,7 @@
 
     return Color;
 
+  })();
   };
   
   chromato.rgb = function(r, g, b, a) {
