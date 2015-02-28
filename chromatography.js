@@ -408,6 +408,15 @@
     return [l, a, b];
   };
 
+  Color.rgb2lab = function(r, g, b) {
+    var x, y, z, _ref2, _ref3;
+    if (r !== void 0 && r.length === 3) {
+      _ref2 = r, r = _ref2[0], g = _ref2[1], b = _ref2[2];
+    }
+    _ref3 = Color.rgb2xyz(r, g, b), x = _ref3[0], y = _ref3[1], z = _ref3[2];
+    return Color.xyz2lab(x, y, z);
+  };
+
   };
 
   };
