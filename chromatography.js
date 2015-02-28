@@ -154,6 +154,50 @@
     return '#' + str.substr(str.length - 6);
   };
 
+  Color.hsv2rgb = function(h, s, v) {
+    var b, f, g, i, l, p, q, r, t, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
+    if (type(h) === 'array' && h.length === 3) {
+      _ref2 = h, h = _ref2[0], s = _ref2[1], l = _ref2[2];
+    }
+    v *= 255;
+    if (s === 0 && isNaN(h)) {
+      r = g = b = v;
+    } else {
+      if (h === 360) h = 0;
+      if (h > 360) h -= 360;
+      if (h < 0) h += 360;
+      h /= 60;
+      i = Math.floor(h);
+      f = h - i;
+      p = v * (1 - s);
+      q = v * (1 - s * f);
+      t = v * (1 - s * (1 - f));
+      switch (i) {
+        case 0:
+          _ref3 = [v, t, p], r = _ref3[0], g = _ref3[1], b = _ref3[2];
+          break;
+        case 1:
+          _ref4 = [q, v, p], r = _ref4[0], g = _ref4[1], b = _ref4[2];
+          break;
+        case 2:
+          _ref5 = [p, v, t], r = _ref5[0], g = _ref5[1], b = _ref5[2];
+          break;
+        case 3:
+          _ref6 = [p, q, v], r = _ref6[0], g = _ref6[1], b = _ref6[2];
+          break;
+        case 4:
+          _ref7 = [t, p, v], r = _ref7[0], g = _ref7[1], b = _ref7[2];
+          break;
+        case 5:
+          _ref8 = [v, p, q], r = _ref8[0], g = _ref8[1], b = _ref8[2];
+      }
+    }
+    r = Math.round(r);
+    g = Math.round(g);
+    b = Math.round(b);
+    return [r, g, b];
+  };
+
   };
   };
 
