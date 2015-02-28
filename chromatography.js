@@ -65,7 +65,6 @@
     };
 
     Color.prototype.interpolate = function(f, col, m) {
-
       var dh, hue, hue0, hue1, lbv, lbv0, lbv1, me, sat, sat0, sat1, xyz0, xyz1;
       me = this;
       if (m == null) m = 'rgb';
@@ -119,9 +118,7 @@
         throw m + ' is not supported as a color mode';
       }
     };
-
     return Color;
-
   })();
 
   Color.hex2rgb = function(hex) {
@@ -285,7 +282,6 @@
   };
 
   Color.lab2xyz = function(l, a, b) {
-
     var finv, ill, sl, x, y, z, _ref2;
     if (type(l) === 'array' && l.length === 3) {
       _ref2 = l, l = _ref2[0], a = _ref2[1], b = _ref2[2];
@@ -306,7 +302,6 @@
   };
 
   Color.xyz2rgb = function(x, y, z) {
-
     var b, bl, clip, correct, g, gl, r, rl, _ref2, _ref3;
     if (type(x) === 'array' && x.length === 3) {
       _ref2 = x, x = _ref2[0], y = _ref2[1], z = _ref2[2];
@@ -339,7 +334,6 @@
   };
 
   Color.lab2rgb = function(l, a, b) {
-
     var x, y, z, _ref2, _ref3, _ref4;
     if (l !== void 0 && l.length === 3) {
       _ref2 = l, l = _ref2[0], a = _ref2[1], b = _ref2[2];
@@ -352,7 +346,6 @@
   };
 
   Color.hcl2lab = function(c, s, l) {
-
     var L, tau_const, a, angle, b, r, _ref2;
     if (type(c) === 'array' && c.length === 3) {
       _ref2 = c, c = _ref2[0], s = _ref2[1], l = _ref2[2];
