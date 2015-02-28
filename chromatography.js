@@ -127,7 +127,7 @@
       if ((chromato.colors != null) && chromato.colors[hex]) {
         hex = chromato.colors[hex];
       } else {
-        throw 'this color format is unknown: ' + hex;
+        throw 'This color format is unknown: ' + hex;
       }
     }
     if (hex.length === 4 || hex.length === 7) hex = hex.substr(1);
