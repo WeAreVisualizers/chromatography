@@ -396,6 +396,25 @@
     return [x, y, z];
   };
 
+  Color.xyz2lab = function(x, y, z) {
+    var a, b, f, ill, l, _ref2;
+    if (x !== void 0 && x.length === 3) {
+      _ref2 = x, x = _ref2[0], y = _ref2[1], z = _ref2[2];
+    }
+    ill = [0.96421, 1.00000, 0.82519];
+    f = function(t) {
+      if (t > Math.pow(6.0 / 29.0, 3)) {
+        return Math.pow(t, 1 / 3);
+      } else {
+        return (1 / 3) * (29 / 6) * (29 / 6) * t + 4.0 / 29.0;
+      }
+    };
+    l = 1.16 * f(y / ill[1]) - 0.16;
+    a = 5 * (f(x / ill[0]) - f(y / ill[1]));
+    b = 2 * (f(y / ill[1]) - f(z / ill[2]));
+    return [l, a, b];
+  };
+
   };
 
   };
