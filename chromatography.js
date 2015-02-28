@@ -351,6 +351,20 @@
     return Color.xyz2rgb(x, y, z);
   };
 
+  Color.hcl2lab = function(c, s, l) {
+
+    var L, tau_const, a, angle, b, r, _ref2;
+    if (type(c) === 'array' && c.length === 3) {
+      _ref2 = c, c = _ref2[0], s = _ref2[1], l = _ref2[2];
+    }
+    c /= 360.0;
+    tau_const = 6.283185307179586476925287;
+    L = l * 0.61 + 0.09;
+    angle = tau_const / 6.0 - c * tau_const;
+    r = (l * 0.311 + 0.125) * s;
+    a = Math.sin(angle) * r;
+    b = Math.cos(angle) * r;
+    return [L, a, b];
   };
   };
 
