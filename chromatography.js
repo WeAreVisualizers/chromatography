@@ -661,6 +661,15 @@
     return Ramp;
   })();
     }
+  CSSColors = (function() {
+    __extends(CSSColors, ColorScale);
+
+    function CSSColors(name) {
+      var me;
+      me = this;
+      me.name = name;
+      me.setClasses(7);
+      me;
     }
   };
 
