@@ -693,6 +693,8 @@
 
   chromato.CSSColors = CSSColors;
 
+  if ((_ref2 = chromato.scales) == null) chromato.scales = {};
+
   };
 
 
