@@ -660,6 +660,9 @@
 
     return Ramp;
   })();
+
+  chromato.Ramp = Ramp;
+
     }
   CSSColors = (function() {
     __extends(CSSColors, ColorScale);
