@@ -900,10 +900,7 @@
 
 }).call(this);
 
- 
 var createPalette = {
-  
-  
 	generate: function(colorsCount, checkColor, forceMode, quality, ultra_precision){
 		if(colorsCount === undefined)
 			colorsCount = 8;
@@ -1108,6 +1105,4 @@ var createPalette = {
 		}
 		return diffColors;
 	}
-	
 }
-
