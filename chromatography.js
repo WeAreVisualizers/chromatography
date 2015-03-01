@@ -501,10 +501,28 @@
 
   chromato.Color = Color;
 
+  chromato.hsl = function(h, s, l) {
+    return new Color(h, s, l, 'hsl');
   };
 
+  chromato.hsv = function(h, s, v) {
+    return new Color(h, s, v, 'hsv');
   };
+
+  chromato.rgb = function(r, g, b) {
+    return new Color(r, g, b, 'rgb');
+  };
+
+  chromato.hex = function(x) {
     return new Color(x);
+  };
+
+  chromato.lab = function(l, a, b) {
+    return new Color(l, a, b, 'lab');
+  };
+
+  chromato.hcl = function(c, s, l) {
+    return new Color(c, s, l, 'hcl');
   };
 
   chromato.hsi = function(h, s, i) {
