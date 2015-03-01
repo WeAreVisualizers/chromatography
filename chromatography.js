@@ -675,8 +675,11 @@
 
 
 
+  chromato.limits = function(data, mode, num, prop) {
     }
     }
+    return limits;
+  };
     }
   };
 
