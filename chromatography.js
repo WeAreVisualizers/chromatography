@@ -835,6 +835,12 @@
       name = _ref3[_i];
       classToType['[object ' + name + ']'] = name.toLowerCase();
     }
+    return function(obj) {
+      var strType;
+      strType = Object.prototype.toString.call(obj);
+      return classToType[strType] || 'object';
+    };
+  })();
   Array.max = function(array) {
     return Math.max.apply(Math, array);
   };
