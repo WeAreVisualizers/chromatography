@@ -688,6 +688,8 @@
       return me.name + ' l' + me.numClasses + ' c' + c;
     };
 
+    return CSSColors;
+  })();
   };
 
 
