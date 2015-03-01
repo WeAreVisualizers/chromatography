@@ -645,6 +645,9 @@
 
     return ColorScale;
   })();
+
+  chromato.ColorScale = ColorScale;
+
     }
     }
     }
