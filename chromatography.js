@@ -841,6 +841,9 @@
       return classToType[strType] || 'object';
     };
   })();
+
+  if ((_ref3 = root.type) == null) root.type = type;
+
   Array.max = function(array) {
     return Math.max.apply(Math, array);
   };
