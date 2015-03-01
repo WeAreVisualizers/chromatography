@@ -824,6 +824,9 @@
     }
     return limits;
   };
+
+  root = typeof exports !== 'undefined' && exports !== null ? exports : this;
+
     }
   Array.max = function(array) {
     return Math.max.apply(Math, array);
