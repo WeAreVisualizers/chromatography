@@ -669,7 +669,33 @@
 
   chromato.Ramp = Ramp;
 
+  Categories = (function() {
+    __extends(Categories, ColorScale);
+
+    function Categories(colors) {
+      var me;
+      me = this;
+      me.colors = colors;
     }
+
+    Categories.prototype.parseData = function(data, data_col) {};
+
+    Categories.prototype.getColor = function(value) {
+      var me;
+      me = this;
+      if (me.colors.hasOwnProperty(value)) {
+        return me.colors[value];
+      } else {
+        return '#cccccc';
+      }
+    };
+
+    Categories.prototype.validValue = function(value) {
+      return this.colors.hasOwnProperty(value);
+    };
+
+    return Categories;
+  })();
   CSSColors = (function() {
     __extends(CSSColors, ColorScale);
 
