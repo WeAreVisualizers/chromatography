@@ -708,6 +708,116 @@
         }
       }
     }
+    for (_k = 0, _len3 = values.length; _k < _len3; _k++) {
+      val = values[_k];
+      if (!!isNaN(val)) continue;
+      if (val < min) min = val;
+      if (val > max) max = val;
+      sum += val;
+    }
+    values = values.sort(function(a, b) {
+      return a - b;
+    });
+    limits = [];
+    if (mode.substr(0, 1) === 'c') {
+      limits.push(min);
+      limits.push(max);
+    }
+    if (mode.substr(0, 1) === 'e') {
+      limits.push(min);
+      for (i = 1, _ref3 = num - 1; 1 <= _ref3 ? i <= _ref3 : i >= _ref3; 1 <= _ref3 ? i++ : i--) {
+        limits.push(min + (i / num) * (max - min));
+      }
+      limits.push(max);
+    } else if (mode.substr(0, 1) === 'q') {
+      limits.push(min);
+      for (i = 1, _ref4 = num - 1; 1 <= _ref4 ? i <= _ref4 : i >= _ref4; 1 <= _ref4 ? i++ : i--) {
+        p = values.length * i / num;
+        pb = Math.floor(p);
+        if (pb === p) {
+          limits.push(values[pb]);
+        } else {
+          pr = p - pb;
+          limits.push(values[pb] * pr + values[pb + 1] * (1 - pr));
+        }
+      }
+      limits.push(max);
+    } else if (mode.substr(0, 1) === 'k') {
+      n = values.length;
+      assignments = new Array(n);
+      clusterSizes = new Array(num);
+      repeat = true;
+      nb_iters = 0;
+      centroids = null;
+      centroids = [];
+      centroids.push(min);
+      for (i = 1, _ref5 = num - 1; 1 <= _ref5 ? i <= _ref5 : i >= _ref5; 1 <= _ref5 ? i++ : i--) {
+        centroids.push(min + (i / num) * (max - min));
+      }
+      centroids.push(max);
+      while (repeat) {
+        for (j = 0, _ref6 = num - 1; 0 <= _ref6 ? j <= _ref6 : j >= _ref6; 0 <= _ref6 ? j++ : j--) {
+          clusterSizes[j] = 0;
+        }
+        for (i = 0, _ref7 = n - 1; 0 <= _ref7 ? i <= _ref7 : i >= _ref7; 0 <= _ref7 ? i++ : i--) {
+          value = values[i];
+          mindist = Number.MAX_VALUE;
+          for (j = 0, _ref8 = num - 1; 0 <= _ref8 ? j <= _ref8 : j >= _ref8; 0 <= _ref8 ? j++ : j--) {
+            dist = Math.abs(centroids[j] - value);
+            if (dist < mindist) {
+              mindist = dist;
+              best = j;
+            }
+          }
+          clusterSizes[best]++;
+          assignments[i] = best;
+        }
+        newCentroids = new Array(num);
+        for (j = 0, _ref9 = num - 1; 0 <= _ref9 ? j <= _ref9 : j >= _ref9; 0 <= _ref9 ? j++ : j--) {
+          newCentroids[j] = null;
+        }
+        for (i = 0, _ref10 = n - 1; 0 <= _ref10 ? i <= _ref10 : i >= _ref10; 0 <= _ref10 ? i++ : i--) {
+          cluster = assignments[i];
+          if (newCentroids[cluster] === null) {
+            newCentroids[cluster] = values[i];
+          } else {
+            newCentroids[cluster] += values[i];
+          }
+        }
+        for (j = 0, _ref11 = num - 1; 0 <= _ref11 ? j <= _ref11 : j >= _ref11; 0 <= _ref11 ? j++ : j--) {
+          newCentroids[j] *= 1 / clusterSizes[j];
+        }
+        repeat = false;
+        for (j = 0, _ref12 = num - 1; 0 <= _ref12 ? j <= _ref12 : j >= _ref12; 0 <= _ref12 ? j++ : j--) {
+          if (newCentroids[j] !== centroids[i]) {
+            repeat = true;
+            break;
+          }
+        }
+        centroids = newCentroids;
+        nb_iters++;
+        if (nb_iters > 200) repeat = false;
+      }
+      kClusters = {};
+      for (j = 0, _ref13 = num - 1; 0 <= _ref13 ? j <= _ref13 : j >= _ref13; 0 <= _ref13 ? j++ : j--) {
+        kClusters[j] = [];
+      }
+      for (i = 0, _ref14 = n - 1; 0 <= _ref14 ? i <= _ref14 : i >= _ref14; 0 <= _ref14 ? i++ : i--) {
+        cluster = assignments[i];
+        kClusters[cluster].push(values[i]);
+      }
+      tmpKMeansBreaks = [];
+      for (j = 0, _ref15 = num - 1; 0 <= _ref15 ? j <= _ref15 : j >= _ref15; 0 <= _ref15 ? j++ : j--) {
+        tmpKMeansBreaks.push(kClusters[j][0]);
+        tmpKMeansBreaks.push(kClusters[j][kClusters[j].length - 1]);
+      }
+      tmpKMeansBreaks = tmpKMeansBreaks.sort(function(a, b) {
+        return a - b;
+      });
+      limits.push(tmpKMeansBreaks[0]);
+      for (i = 1, _ref16 = tmpKMeansBreaks.length - 1; i <= _ref16; i += 2) {
+        if (!isNaN(tmpKMeansBreaks[i])) limits.push(tmpKMeansBreaks[i]);
+      }
     }
     return limits;
   };
