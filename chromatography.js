@@ -1082,5 +1082,32 @@ var createPalette = {
 		}
 	},
 
+	diffSort: function(colorsToSort){
+		var diffColors = [colorsToSort.shift()];
+		while(colorsToSort.length>0){
+			var index = -1;
+			var maxDistance = -1;
+			for(candidate_index=0; candidate_index<colorsToSort.length; candidate_index++){
+				var d = 1000000000;
+				for(i=0; i<diffColors.length; i++){
+					var color_a = colorsToSort[candidate_index].lab();
+					var color_b = diffColors[i].lab();
+					var dl = color_a[0]-color_b[0];
+					var da = color_a[1]-color_b[1];
+					var db = color_a[2]-color_b[2];
+					d = Math.min(d, Math.sqrt(Math.pow(dl, 2)+Math.pow(da, 2)+Math.pow(db, 2)));
+				}
+				if(d > maxDistance){
+					maxDistance = d;
+					index = candidate_index;
+				}
+			}
+			var color = colorsToSort[index];
+			diffColors.push(color);
+			colorsToSort = colorsToSort.filter(function(c,i){return i!=index;});
+		}
+		return diffColors;
+	}
 	
 }
+
