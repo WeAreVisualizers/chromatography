@@ -558,6 +558,91 @@
       me.setClasses((_ref7 = opts.limits) != null ? _ref7 : [0, 1]);
       me;
     }
+
+    ColorScale.prototype.getColor = function(value) {
+      var c, f, f0, me;
+      me = this;
+      if (isNaN(value)) return me.nacol;
+      if (me.classLimits.length > 2) {
+        c = me.getClass(value);
+        f = c / (me.numClasses - 1);
+      } else {
+        f = f0 = (value - me.min) / (me.max - me.min);
+        f = Math.min(1, Math.max(0, f));
+      }
+      return me.fColor(f);
+    };
+
+    ColorScale.prototype.fColor = function(f) {
+      var col, cols, i, me, p, _ref2;
+      me = this;
+      cols = me.colors;
+      for (i = 0, _ref2 = me.pos.length - 1; 0 <= _ref2 ? i <= _ref2 : i >= _ref2; 0 <= _ref2 ? i++ : i--) {
+        p = me.pos[i];
+        if (f <= p) {
+          col = cols[i];
+          break;
+        }
+        if (f >= p && i === me.pos.length - 1) {
+          col = cols[i];
+          break;
+        }
+        if (f > p && f < me.pos[i + 1]) {
+          f = (f - p) / (me.pos[i + 1] - p);
+          col = chromato.interpolate(cols[i], cols[i + 1], f, me.mode);
+          break;
+        }
+      }
+      return col;
+    };
+
+    ColorScale.prototype.classifyValue = function(value) {
+      var i, limits, maxc, minc, n, self;
+      self = this;
+      limits = self.classLimits;
+      if (limits.length > 2) {
+        n = limits.length - 1;
+        i = self.getClass(value);
+        value = limits[i] + (limits[i + 1] - limits[i]) * 0.5;
+        minc = limits[0];
+        maxc = limits[n - 1];
+        value = self.min + ((value - minc) / (maxc - minc)) * (self.max - self.min);
+      }
+      return value;
+    };
+
+    ColorScale.prototype.setClasses = function(limits) {
+      var me;
+      if (limits == null) limits = [];
+      me = this;
+      me.classLimits = limits;
+      me.min = limits[0];
+      me.max = limits[limits.length - 1];
+      if (limits.length === 2) {
+        return me.numClasses = 0;
+      } else {
+        return me.numClasses = limits.length - 1;
+      }
+    };
+
+    ColorScale.prototype.getClass = function(value) {
+      var i, limits, n, self;
+      self = this;
+      limits = self.classLimits;
+      if (limits != null) {
+        n = limits.length - 1;
+        i = 0;
+        while (i < n && value >= limits[i]) {
+          i++;
+        }
+        return i - 1;
+      }
+    };
+
+    ColorScale.prototype.validValue = function(value) {
+      return !isNaN(value);
+    };
+
     return ColorScale;
   })();
     }
