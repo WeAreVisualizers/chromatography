@@ -3,6 +3,11 @@
   var Color, ColorScale, chromato, CSSColors, Ramp, _ref, _ref2, _ref3;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
+  root = typeof exports !== 'undefined' && exports !== null ? exports : this;
+
+  chromato = (_ref = root.chromato) != null ? _ref : root.chromato = {};
+
+  if (typeof module !== 'undefined' && module !== null) module.exports = chromato;
 
   Color = (function() {
     function Color(x, y, z, m) {
