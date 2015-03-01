@@ -690,6 +690,9 @@
 
     return CSSColors;
   })();
+
+  chromato.CSSColors = CSSColors;
+
   };
 
 
