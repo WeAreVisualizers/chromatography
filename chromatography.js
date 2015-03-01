@@ -680,6 +680,14 @@
       me.setClasses(7);
       me;
     }
+
+    CSSColors.prototype.getColor = function(value) {
+      var c, me;
+      me = this;
+      c = me.getClass(value);
+      return me.name + ' l' + me.numClasses + ' c' + c;
+    };
+
   };
 
 
