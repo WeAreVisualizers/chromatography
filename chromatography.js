@@ -1,6 +1,6 @@
 (function () {
 
-  var Color, ColorScale, chromato, _ref, _ref2, _ref3;
+  var Color, ColorScale, chromato, CSSColors, _ref, _ref2, _ref3;
 
 
   Color = (function() {
