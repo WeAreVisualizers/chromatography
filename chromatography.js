@@ -676,6 +676,29 @@
 
 
   chromato.limits = function(data, mode, num, prop) {
+    if (type(data) === 'array') {
+      if (type(data[0]) !== 'object' && type(data[0]) !== 'array') {
+        for (_i = 0, _len = data.length; _i < _len; _i++) {
+          val = data[_i];
+          if (!isNaN(val)) values.push(Number(val));
+        }
+      } else {
+        for (_j = 0, _len2 = data.length; _j < _len2; _j++) {
+          row = data[_j];
+          values.push(Number(row[prop]));
+        }
+      }
+    } else if (type(data) === 'object') {
+      for (k in data) {
+        val = data[k];
+        if (type(val) === 'object' && type(prop) === 'string') {
+          if (!isNaN(val[prop])) values.push(Number(val[prop]));
+        } else if (type(val) === 'array' && type(prop) === 'number') {
+          if (!isNaN(val[prop])) values.push(Number(val[prop]));
+        } else if (type(val) === 'number') {
+          if (!isNaN(val)) values.push(Number(val));
+        }
+      }
     }
     }
     return limits;
