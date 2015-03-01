@@ -827,6 +827,13 @@
 
   root = typeof exports !== 'undefined' && exports !== null ? exports : this;
 
+  type = (function() {
+    var classToType, name, _i, _len, _ref3;
+    classToType = {};
+    _ref3 = 'Boolean Number String Function Array Date RegExp Undefined Null'.split(' ');
+    for (_i = 0, _len = _ref3.length; _i < _len; _i++) {
+      name = _ref3[_i];
+      classToType['[object ' + name + ']'] = name.toLowerCase();
     }
   Array.max = function(array) {
     return Math.max.apply(Math, array);
