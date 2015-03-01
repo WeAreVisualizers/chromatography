@@ -648,7 +648,18 @@
 
   chromato.ColorScale = ColorScale;
 
+  Ramp = (function() {
+    __extends(Ramp, ColorScale);
+
+    function Ramp(col0, col1, mode) {
+      if (col0 == null) col0 = '#fe0000';
+      if (col1 == null) col1 = '#feeeee';
+      if (mode == null) mode = 'hsl';
+      Ramp.__super__.constructor.call(this, [col0, col1], [0, 1], mode);
     }
+
+    return Ramp;
+  })();
     }
     }
   };
