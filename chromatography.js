@@ -536,6 +536,28 @@
   };
 
   ColorScale = (function() {
+
+    function ColorScale(opts) {
+      var c, col, cols, me, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
+      me = this;
+      me.colors = cols = (_ref2 = opts.colors) != null ? _ref2 : ['#ddd', '#222'];
+      for (c = 0, _ref3 = cols.length - 1; 0 <= _ref3 ? c <= _ref3 : c >= _ref3; 0 <= _ref3 ? c++ : c--) {
+        col = cols[c];
+        if (type(col) === 'string') cols[c] = new Color(col);
+      }
+      if (opts.positions != null) {
+        me.pos = opts.positions;
+      } else {
+        me.pos = [];
+        for (c = 0, _ref4 = cols.length - 1; 0 <= _ref4 ? c <= _ref4 : c >= _ref4; 0 <= _ref4 ? c++ : c--) {
+          me.pos.push(c / (cols.length - 1));
+        }
+      }
+      me.mode = (_ref5 = opts.mode) != null ? _ref5 : 'hsv';
+      me.nacol = (_ref6 = opts.nacol) != null ? _ref6 : '#ccc';
+      me.setClasses((_ref7 = opts.limits) != null ? _ref7 : [0, 1]);
+      me;
+    }
     return ColorScale;
   })();
     }
