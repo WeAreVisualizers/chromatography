@@ -905,3 +905,7 @@
 }).call(this);
 
  
+var createPalette = {
+  
+	
+}
