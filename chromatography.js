@@ -535,6 +535,9 @@
     return a.interpolate(f, b, m);
   };
 
+  ColorScale = (function() {
+    return ColorScale;
+  })();
     }
     if (type(a) === 'string') {
       a = new Color(a);
