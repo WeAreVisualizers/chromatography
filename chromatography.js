@@ -529,6 +529,10 @@
     return new Color(h, s, i, 'hsi');
   };
 
+  chromato.interpolate = function(a, b, f, m) {
+    if (type(a) === 'string') a = new Color(a);
+    if (type(b) === 'string') b = new Color(b);
+    return a.interpolate(f, b, m);
   };
 
     }
