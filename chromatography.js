@@ -696,6 +696,9 @@
 
     return Categories;
   })();
+
+  chromato.Categories = Categories;
+
   CSSColors = (function() {
     __extends(CSSColors, ColorScale);
 
