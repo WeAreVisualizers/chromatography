@@ -648,7 +648,6 @@
     ColorScale.prototype.validValue = function(value) {
       return !isNaN(value);
     };
-
     return ColorScale;
   })();
 
@@ -663,7 +662,6 @@
       if (mode == null) mode = 'hsl';
       Ramp.__super__.constructor.call(this, [col0, col1], [0, 1], mode);
     }
-
     return Ramp;
   })();
 
@@ -693,7 +691,6 @@
     Categories.prototype.validValue = function(value) {
       return this.colors.hasOwnProperty(value);
     };
-
     return Categories;
   })();
 
@@ -916,14 +913,14 @@ var createPalette = {
 			var colors = [];
 			function checkLab(lab){
 				var color = chromato.lab(lab[0], lab[1], lab[2]);
-				return !isNaN(color.rgb[0]) && color.rgb[0]>=0 && color.rgb[1]>=0 && color.rgb[2]>=0 && color.rgb[0]<256 && color.rgb[1]<256 && color.rgb[2]<256 && checkColor(color);
+				return !isNaN(color.rgb[0]) && color.rgb[0] >= 0 && color.rgb[1] >= 0 && color.rgb[2] >= 0 && color.rgb[0] < 256 && color.rgb[1] < 256 && color.rgb[2] < 256 && checkColor(color);
 			}
 			
 			var vectors = {};
-			for(i=0; i<colorsCount; i++){
-				var color = [Math.random(),2*Math.random()-1,2*Math.random()-1];
+			for(i = 0; i < colorsCount; i++){
+				var color = [Math.random(), 2 * Math.random() - 1, 2 * Math.random() - 1];
 				while(!checkLab(color)){
-					color = [Math.random(),2*Math.random()-1,2*Math.random()-1];
+					color = [Math.random(), 2 * Math.random() - 1, 2 * Math.random() - 1];
 				}
 				colors.push(color);
 			}
@@ -932,19 +929,19 @@ var createPalette = {
 			var speed = 0.05;
 			var steps = quality * 20;
 			while(steps-- > 0){
-				for(i=0; i<colors.length; i++){
+				for(i = 0; i < colors.length; i++){
 					vectors[i] = {dl:0, da:0, db:0};
 				}
-				for(i=0; i<colors.length; i++){
+				for(i = 0; i < colors.length; i++){
 					var color_a = colors[i];
-					for(j=0; j<i; j++){
+					for(j = 0; j < i; j++){
 						var color_b = colors[j];
-						var dl = color_a[0]-color_b[0];
-						var da = color_a[1]-color_b[1];
-						var db = color_a[2]-color_b[2];
-						var d = Math.sqrt(Math.pow(dl, 2)+Math.pow(da, 2)+Math.pow(db, 2));
-						if(d>0){
-							var force = repulsion/Math.pow(d,2);
+						var dl = color_a[0] - color_b[0];
+						var da = color_a[1] - color_b[1];
+						var db = color_a[2] - color_b[2];
+						var d = Math.sqrt(Math.pow(dl, 2) + Math.pow(da, 2) + Math.pow(db, 2));
+						if(d > 0){
+							var force = repulsion / Math.pow(d, 2);
 							vectors[i].dl += dl * force / d;
 							vectors[i].da += da * force / d;
 							vectors[i].db += db * force / d;
@@ -958,12 +955,12 @@ var createPalette = {
 						}
 					}
 				}
-				for(i=0; i<colors.length; i++){
+				for(i = 0; i < colors.length; i++){
 					var color = colors[i];
-					var displacement = speed * Math.sqrt(Math.pow(vectors[i].dl, 2)+Math.pow(vectors[i].da, 2)+Math.pow(vectors[i].db, 2));
+					var displacement = speed * Math.sqrt(Math.pow(vectors[i].dl, 2) + Math.pow(vectors[i].da, 2) + Math.pow(vectors[i].db, 2));
 					if(displacement>0){
 						var ratio = speed * Math.min(0.1, displacement)/displacement;
-						candidateLab = [color[0] + vectors[i].dl*ratio, color[1] + vectors[i].da*ratio, color[2] + vectors[i].db*ratio];
+						candidateLab = [color[0] + vectors[i].dl * ratio, color[1] + vectors[i].da * ratio, color[2] + vectors[i].db * ratio];
 						if(checkLab(candidateLab)){
 							colors[i] = candidateLab;
 						}
@@ -975,22 +972,22 @@ var createPalette = {
 			function checkColor2(color){
 				var lab = color.lab();
 				var hcl = color.hcl();
-				return !isNaN(color.rgb[0]) && color.rgb[0]>=0 && color.rgb[1]>=0 && color.rgb[2]>=0 && color.rgb[0]<256 && color.rgb[1]<256 && color.rgb[2]<256 && checkColor(color);
+				return !isNaN(color.rgb[0]) && color.rgb[0] >= 0 && color.rgb[1] >= 0 && color.rgb[2] >= 0 && color.rgb[0]<256 && color.rgb[1]<256 && color.rgb[2]<256 && checkColor(color);
 			}
 			var kMeans = [];
-			for(i=0; i<colorsCount; i++){
-				var lab = [Math.random(),2*Math.random()-1,2*Math.random()-1];
+			for(i = 0; i < colorsCount; i++){
+				var lab = [Math.random(), 2 * Math.random() - 1, 2 * Math.random() - 1];
 				while(!checkColor2(chromato.lab(lab))){
-					lab = [Math.random(),2*Math.random()-1,2*Math.random()-1];
+					lab = [Math.random(), 2 * Math.random() - 1, 2 * Math.random() - 1];
 				}
 				kMeans.push(lab);
 			}
 			var colorSamples = [];
 			var samplesClosest = [];
 			if(ultra_precision){
-				for(l=0; l<=1; l+=0.01){
-					for(a=-1; a<=1; a+=0.05){
-						for(b=-1; b<=1; b+=0.05){
+				for(l = 0; l <= 1; l += 0.01){
+					for(a =- 1; a <= 1; a += 0.05){
+						for(b =- 1; b <= 1; b += 0.05){
 							if(checkColor2(chromato.lab(l, a, b))){
 								colorSamples.push([l, a, b]);
 								samplesClosest.push(null);
@@ -999,9 +996,9 @@ var createPalette = {
 					}
 				}
 			} else {
-				for(l=0; l<=1; l+=0.05){
-					for(a=-1; a<=1; a+=0.1){
-						for(b=-1; b<=1; b+=0.1){
+				for(l = 0; l <= 1; l += 0.05){
+					for(a =- 1; a <= 1; a += 0.1){
+						for(b =- 1; b <= 1; b += 0.1){
 							if(checkColor2(chromato.lab(l, a, b))){
 								colorSamples.push([l, a, b]);
 								samplesClosest.push(null);
@@ -1012,12 +1009,12 @@ var createPalette = {
 			}
 			var steps = quality;
 			while(steps-- > 0){
-				for(i=0; i<colorSamples.length; i++){
+				for(i = 0; i < colorSamples.length; i++){
 					var lab = colorSamples[i];
 					var min_dist = 1000000;
-					for(j=0; j<kMeans.length; j++){
+					for(j = 0; j < kMeans.length; j++){
 						var kMean = kMeans[j];
-						var distance = Math.sqrt(Math.pow(lab[0]-kMean[0], 2) + Math.pow(lab[1]-kMean[1], 2) + Math.pow(lab[2]-kMean[2], 2));
+						var distance = Math.sqrt(Math.pow(lab[0] - kMean[0], 2) + Math.pow(lab[1]-kMean[1], 2) + Math.pow(lab[2] - kMean[2], 2));
 						if(distance < min_dist){
 							min_dist = distance;
 							samplesClosest[i] = j;
@@ -1025,10 +1022,10 @@ var createPalette = {
 					}
 				}
 				var freeColorSamples = colorSamples.slice(0);
-				for(j=0; j<kMeans.length; j++){
+				for(j = 0; j < kMeans.length; j++){
 					var count = 0;
 					var candidateKMean = [0, 0, 0];
-					for(i=0; i<colorSamples.length; i++){
+					for(i = 0; i < colorSamples.length; i++){
 						if(samplesClosest[i] == j){
 							count++;
 							candidateKMean[0] += colorSamples[i][0];
@@ -1036,19 +1033,19 @@ var createPalette = {
 							candidateKMean[2] += colorSamples[i][2];
 						}
 					}
-					if(count!=0){
+					if(count != 0){
 						candidateKMean[0] /= count;
 						candidateKMean[1] /= count;
 						candidateKMean[2] /= count;
 					}
-					if(count!=0 && checkColor2(chromato.lab(candidateKMean[0], candidateKMean[1], candidateKMean[2])) && candidateKMean){
+					if(count != 0 && checkColor2(chromato.lab(candidateKMean[0], candidateKMean[1], candidateKMean[2])) && candidateKMean){
 						kMeans[j] = candidateKMean;
 					} else {
 						if(freeColorSamples.length>0){
 							var min_dist = 10000000000;
 							var closest = -1;
-							for(i=0; i<freeColorSamples.length; i++){
-								var distance = Math.sqrt(Math.pow(freeColorSamples[i][0]-candidateKMean[0], 2) + Math.pow(freeColorSamples[i][1]-candidateKMean[1], 2) + Math.pow(freeColorSamples[i][2]-candidateKMean[2], 2));
+							for(i = 0; i<freeColorSamples.length; i++){
+								var distance = Math.sqrt(Math.pow(freeColorSamples[i][0] - candidateKMean[0], 2) + Math.pow(freeColorSamples[i][1] - candidateKMean[1], 2) + Math.pow(freeColorSamples[i][2] - candidateKMean[2], 2));
 								if(distance < min_dist){
 									min_dist = distance;
 									closest = i;
@@ -1058,8 +1055,8 @@ var createPalette = {
 						} else {
 							var min_dist = 10000000000;
 							var closest = -1;
-							for(i=0; i<colorSamples.length; i++){
-								var distance = Math.sqrt(Math.pow(colorSamples[i][0]-candidateKMean[0], 2) + Math.pow(colorSamples[i][1]-candidateKMean[1], 2) + Math.pow(colorSamples[i][2]-candidateKMean[2], 2));
+							for(i = 0; i < colorSamples.length; i++){
+								var distance = Math.sqrt(Math.pow(colorSamples[i][0] - candidateKMean[0], 2) + Math.pow(colorSamples[i][1]-candidateKMean[1], 2) + Math.pow(colorSamples[i][2] - candidateKMean[2], 2));
 								if(distance < min_dist){
 									min_dist = distance;
 									closest = i;
@@ -1081,17 +1078,17 @@ var createPalette = {
 
 	diffSort: function(colorsToSort){
 		var diffColors = [colorsToSort.shift()];
-		while(colorsToSort.length>0){
+		while(colorsToSort.length > 0){
 			var index = -1;
 			var maxDistance = -1;
-			for(candidate_index=0; candidate_index<colorsToSort.length; candidate_index++){
+			for(candidate_index = 0; candidate_index < colorsToSort.length; candidate_index++){
 				var d = 1000000000;
-				for(i=0; i<diffColors.length; i++){
+				for(i = 0; i < diffColors.length; i++){
 					var color_a = colorsToSort[candidate_index].lab();
 					var color_b = diffColors[i].lab();
-					var dl = color_a[0]-color_b[0];
-					var da = color_a[1]-color_b[1];
-					var db = color_a[2]-color_b[2];
+					var dl = color_a[0] - color_b[0];
+					var da = color_a[1] - color_b[1];
+					var db = color_a[2] - color_b[2];
 					d = Math.min(d, Math.sqrt(Math.pow(dl, 2)+Math.pow(da, 2)+Math.pow(db, 2)));
 				}
 				if(d > maxDistance){
@@ -1101,7 +1098,7 @@ var createPalette = {
 			}
 			var color = colorsToSort[index];
 			diffColors.push(color);
-			colorsToSort = colorsToSort.filter(function(c,i){return i!=index;});
+			colorsToSort = colorsToSort.filter(function(c,i){return i != index;});
 		}
 		return diffColors;
 	}
