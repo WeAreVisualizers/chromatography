@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 *.Rproj
+README.html
 
 .DS_Store
 .AppleDouble
