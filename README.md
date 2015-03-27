@@ -8,7 +8,6 @@ So what does this JS library do? It helps you deal with colors. Create color sca
 
 ### Examples
 
-
 #### Transform Color Values Between Formats
 
 Let's transform some color values between formats. Usually, I'm trying to get a hexadecimal color value. Going from RGB to hex:
@@ -28,7 +27,6 @@ HSV to hex:
 ```js
 chromato.hsv(0.3, 1, 1); // returns "#FF0100"
 ```
-
 
 #### Interpolate Between Two Color Values
 
