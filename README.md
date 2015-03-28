@@ -41,4 +41,16 @@ Might as well do it in RGB:
 chromato.interpolate('#C64C66', '#6B71D9', 0.5, 'rgb'); // returns "#985E9F"
 ```
 
+#### Generate a Randomized Set of Colors Based on HCL Parameter Ranges
+
+Define a number of distinct colors using ranges of hue, chroma, and lightness:
+
+```js
+var colors = createPalette.generate(
+                12, function(color){ var hcl = color.hcl();
+                return hcl[0]>= 0 && hcl[0]<= 360 && hcl[1]>=0 && hcl[1]<=3.0 && hcl[2]>=0.75 &&hcl[2]<=1.5 ;
+                }, false, 30);
+var colors = createPalette.diffSort(colors);
+colors;
+```
 
