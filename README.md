@@ -30,7 +30,7 @@ chromato.hsv(0.3, 1, 1); // returns "#FF0100"
 
 #### Interpolate Between Two Color Values
 
-You can interpolate across two colors, using the `chromato.interpolate` function. Here is an interpolatation halfway between two colors (provided in the hexadecimal format) in the HSL color mode:
+You can interpolate across two colors, using the `chromato.interpolate` function. Here is an interpolation halfway between two colors (provided in the hexadecimal format) in the HSL color mode:
 
 ```js
 chromato.interpolate('#C64C66', '#6B71D9', 0.5, 'hsl'); // returns "#C05BD0"
